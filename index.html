@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>国债服务</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .btn {
+            display: block;
+            margin: 20px 0;
+            padding: 15px;
+            background: #1890ff;
+            color: white;
+            text-align: center;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        .footer { margin-top: 40px; color: #666; text-align: center; }
+    </style>
+</head>
+<body>
+    <h1 style="text-align:center;">国债服务平台</h1>
+    
+    <a href="bond.html" class="btn">最新国债销售信息</a>
+    <a href="https://docs.qq.com/sheet/DSxxxx" class="btn">购买网点查询</a>
+    <a href="https://wj.qq.com/s2/xxxxxx" class="btn">购买意向登记</a>
+    
+    <div class="footer">
+        <p>中国人民银行国债服务处</p>
+        <p>更新时间：<span id="update-date"></span></p>
+    </div>
+
+    <script>
+        document.getElementById('update-date').textContent = 
+            new Date().toLocaleDateString();
+    </script>
+</body>
+</html>
