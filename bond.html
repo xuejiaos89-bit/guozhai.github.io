@@ -5,54 +5,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <style>
-        #bond-image { 
-            max-width: 100%; 
+        /* 图片样式优化 */
+        .rate-image {
+            max-width: 80%;
+            max-height: 400px;
+            width: auto;
+            height: auto;
             border: 1px solid #ddd;
-            margin: 20px 0;
+            margin: 20px auto;
+            display: block;
         }
+        
         .announcement {
             margin-bottom: 15px;
             padding: 15px;
             border-left: 4px solid #1890ff;
             background: #f8f9fa;
         }
-        .iframe-container {
-            width: 100%;
-            height: 600px;
-            border: 1px solid #eee;
+        
+        /* iframe备用样式 */
+        .iframe-fallback {
+            padding: 20px;
+            border: 1px dashed #ccc;
+            text-align: center;
             margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <div class="container py-4">
+        <h1 class="text-center mb-4">国债销售公告</h1>
         
-        <!-- 利率图片 -->
-        <div class="text-center">
-            <img src="images/rate.png" class="img-fluid" alt="国债利率图表">
-        </div>
+        <!-- 优化后的利率图片 -->
+        <img src="images/rate.png" class="rate-image" alt="国债利率图表">
         
-        <!-- 修改后的标题 -->
-        <h1 class="text-center mb-4 text-center">国债销售公告</h1>
-        
-        <!-- 利率图片 -->
-<!--         <div class="text-center">
-            <img src="images/rate.png" class="img-fluid" alt="国债利率图表">
-        </div> -->
-        
-        <!-- 公告内容 -->
-<!--         <h3 class="mt-5">最新公告</h3> -->
+        <!-- iframe内容 -->
         <div class="iframe-container">
             <iframe 
                 src="http://gks.mof.gov.cn/ztztz/guozaiguanli/gzfxdzs/202507/t20250707_3967319.htm" 
                 width="100%" 
-                height="100%"
-                frameborder="0">
+                height="600"
+                frameborder="0"
+                onerror="showFallback()">
+                <div class="iframe-fallback">
+                    <p>无法显示公告内容，请 <a href="http://gks.mof.gov.cn/ztztz/guozaiguanli/gzfxdzs/202507/t20250707_3967319.htm" target="_blank">点击这里</a> 直接访问公告页面</p>
+                </div>
             </iframe>
         </div>
         
-        <!-- 保留返回首页按钮 -->
-        <a href="index.html" class="btn btn-outline-primary mt-3 text-center">← 返回首页</a>
+        <a href="index.html" class="btn btn-outline-primary mt-3 d-block mx-auto" style="width: 150px;">← 返回首页</a>
     </div>
+
+    <script>
+        // 如果iframe加载失败显示备用内容
+        function showFallback() {
+            document.querySelector('.iframe-container').innerHTML = `
+                <div class="iframe-fallback">
+                    <p>无法嵌入显示公告内容，请 <a href="http://gks.mof.gov.cn/ztztz/guozaiguanli/gzfxdzs/202507/t20250707_3967319.htm" target="_blank" class="btn btn-primary">点击查看完整公告</a></p>
+                </div>
+            `;
+        }
+        
+        // 检查iframe是否加载成功
+        window.onload = function() {
+            const iframe = document.querySelector('iframe');
+            iframe.onload = function() {
+                try {
+                    // 尝试访问iframe内容，如果被拒绝则显示备用内容
+                    if(iframe.contentWindow.document.body.innerHTML === '') {
+                        showFallback();
+                    }
+                } catch (e) {
+                    showFallback();
+                }
+            };
+            
+            // 设置超时检查
+            setTimeout(function() {
+                try {
+                    if(iframe.contentWindow.document.body.innerHTML === '') {
+                        showFallback();
+                    }
+                } catch (e) {
+                    showFallback();
+                }
+            }, 3000);
+        };
+    </script>
 </body>
 </html>
