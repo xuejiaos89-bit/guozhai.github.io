@@ -1,24 +1,24 @@
 // 配置部分 ==================================
-const CONFIG = {
-    // Google Sheets配置（需先发布表格）
-    SHEET_ID: '1XqOt6kiE1gW1JQoXXXXXX', // 替换为你的表格ID
-    SHEET_NAME: 'announcements',
+// const CONFIG = {
+//     // Google Sheets配置（需先发布表格）
+//     SHEET_ID: '1XqOt6kiE1gW1JQoXXXXXX', // 替换为你的表格ID
+//     SHEET_NAME: 'announcements',
     
-    // 图片配置（GitHub路径）
-    IMAGE_PATH: 'https://raw.githubusercontent.com/[用户名]/[仓库名]/main/images/rate.png',
+//     // 图片配置（GitHub路径）
+//     IMAGE_PATH: 'https://raw.githubusercontent.com/[用户名]/[仓库名]/main/images/rate.png',
     
-    // 自动刷新间隔（毫秒）
-    REFRESH_INTERVAL: 3600000 // 1小时
-};
+//     // 自动刷新间隔（毫秒）
+//     REFRESH_INTERVAL: 3600000 // 1小时
+// };
 
 // 主逻辑 ===================================
 function loadAllContent() {
     // 加载国债图片（带时间戳避免缓存）
-    document.getElementById('bond-image').src = 
-        `${CONFIG.IMAGE_PATH}?t=${Date.now()}`;
+    // document.getElementById('bond-image').src = 
+    //     `${CONFIG.IMAGE_PATH}?t=${Date.now()}`;
     
     // 加载公告信息
-    fetch(`https://opensheet.elk.sh/${CONFIG.SHEET_ID}/${CONFIG.SHEET_NAME}`)
+    fetch(`http://gks.mof.gov.cn/ztztz/guozaiguanli/gzfxdzs/202507/t20250707_3967319.htm`)
         .then(response => {
             if (!response.ok) throw new Error('网络响应不正常');
             return response.json();
