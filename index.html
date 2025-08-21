@@ -1,101 +1,176 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-    <title>国债服务</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>承销网点查询</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <style>
-        /* 关键：用伪元素实现背景图半透明，不影响内容 */
         body { 
             font-family: Arial, sans-serif; 
             margin: 0; 
             padding: 20px; 
             min-height: 100vh; 
             box-sizing: border-box; 
-            /* 让body成为伪元素的定位容器 */
             position: relative; 
-            /* 确保内容在遮罩层上方 */
             z-index: 1; 
         }
 
-        /* 背景图+半透明遮罩层（核心） */
+        /* 保持与首页一致的背景风格 */
         body::before {
-            content: ""; /* 伪元素必须有content */
-            position: fixed; /* 固定定位，跟随页面滚动 */
+            content: "";
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            /* 背景图设置 */
-            background-image: url("images/bank.png"); /* 替换为实际图片路径 */
-            background-size: cover;
-            background-position: center;
-            /* 半透明效果（0.5为透明度，范围0-1，数值越小越透明） */
-            opacity: 0.4; 
-            /* 让遮罩层在内容下方 */
-            z-index: -1; 
+            background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+            opacity: 0.1;
+            z-index: -1;
         }
 
-
-        /* 内容容器*/
-        .content-container {
-            max-width: 800px; /* 保持原有内容的最大宽度 */
-            margin: 0 auto; /* 内容居中 */
-            background-color: rgba(255, 255, 255, 0.55); /* 白色半透明背景 */
-/*             background-color: transparent; */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
             padding: 30px;
-            border-radius: 10px; /* 圆角边框，更美观 */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 轻微阴影，突出内容 */
-        }
-
-        .btn {
-            display: block;
-            margin: 20px 0;
-            padding: 15px;
-            background: #1890ff;
-            color: white;
-            text-align: center;
-            border-radius: 8px;
-            text-decoration: none;
-            font-size: 18px;
-            transition: background 0.3s; /* 鼠标悬停效果 */
-        }
-
-        .btn:hover {
-            background: #096dd9; /* 按钮悬停时加深颜色 */
-        }
-
-        .footer { 
-            margin-top: 40px; 
-            color: #333; /* 加深文字颜色，配合半透明背景 */
-            text-align: center; 
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
         }
 
         h1 {
             text-align: center;
-            color: #222; /* 标题颜色加深，提升可读性 */
+            margin-bottom: 30px;
+            color: #222;
+            font-weight: 600;
+        }
+
+        .form-container {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 10px;
+            display: block;
+            color: #333;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 12px 15px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            transition: all 0.3s;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23000' viewBox='0 0 16 16'%3E%3Cpath d='M8 12L2 6h12L8 12z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 16px;
+        }
+
+        .form-select:focus {
+            border-color: #1890ff;
+            box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.2);
+            outline: none;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn-go {
+            padding: 12px 30px;
+            background: #1890ff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-go:hover {
+            background: #096dd9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-go:active {
+            transform: translateY(0);
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-top: 30px;
+            color: #1890ff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .back-btn:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <!-- 新增内容容器，用于包裹所有内容并添加半透明背景 -->
-    <div class="content-container">
-        <h1>国债服务平台</h1>
+    <div class="container">
+        <h1>承销机构查询</h1>
         
-        <a href="http://gks.mof.gov.cn/ztztz/guozaiguanli/gzfxdzs/202508/t20250806_3969515.htm" class="btn">国债销售公告</a>
-<!--         <a href="https://docs.qq.com/sheet/DR3R3b1V5SGZKVm1R?no_promotion=1&tab=BB08J2" class="btn">承销网点查询</a> -->
-        <a href="branchs.html" class="btn">承销网点查询</a>
-        <a href="https://wj.qq.com/s2/23377823/8d9c/" class="btn">购买意向登记</a>
-        <a href="bond.html" class="btn">国债知识</a>
+        <div class="form-container">
+            <label class="form-label">选择承销机构：</label>
+            <select class="form-select" id="institution-select">
+                <option value="" selected disabled>-- 请选择承销机构 --</option>
+                <option value="https://docs.qq.com/sheet/DR3R3b1V5SGZKVm1R?no_promotion=1&tab=BB08J2">工商银行</option>
+                <option value="https://docs.qq.com/sheet/DR2hvemhyWWR5SkV0?no_promotion=1&tab=BB08J2">农业银行</option>
+                <option value="https://docs.qq.com/sheet/DR2tHc2RST2dmbnpF?no_promotion=1&tab=BB08J2">中国银行</option>
+                <option value="https://docs.qq.com/sheet/DR0RWekdvV1hjUG53?no_promotion=1&tab=BB08J2">建设银行</option>
+                <option value="https://docs.qq.com/sheet/DR01EU1BWaER5UERi?no_promotion=1&tab=BB08J2">交通银行</option>
+                <option value="https://docs.qq.com/sheet/DR3h4b1d1SnpqSFhC?no_promotion=1&tab=BB08J2">邮储银行</option>
+                <option value="https://docs.qq.com/sheet/DR2hqRFhpQnJjcXRm?no_promotion=1&tab=BB08J2">华夏银行</option>
+                <option value="https://docs.qq.com/sheet/DR2VLbHBwdENUdVVS?no_promotion=1&tab=BB08J2">招商银行</option>
+                <option value="https://docs.qq.com/sheet/DR2pNd3JPc0hEQkJ6?no_promotion=1&tab=BB08J2">平安银行</option>
+                <option value="https://docs.qq.com/sheet/DR2x0d0drT2djQ3NW?no_promotion=1&tab=BB08J2">民生银行</option>
+                <option value="https://docs.qq.com/sheet/DR3VVc05BeU1tZVBZ?no_promotion=1&tab=BB08J2">广发银行</option>
+            </select>
+            
+            <div class="btn-container">
+                <button class="btn-go" id="go-button" disabled>前往查看</button>
+            </div>
+        </div>
         
-        <div class="footer">
-            <p>中国人民银行红河州分行国库科</p>
-            <p>更新时间：<span id="update-date"></span></p>
+        <div class="text-center">
+            <a href="#" class="back-btn">返回首页</a>
         </div>
     </div>
 
     <script>
-        document.getElementById('update-date').textContent = 
-            new Date().toLocaleDateString();
+        document.addEventListener('DOMContentLoaded', function() {
+            const select = document.getElementById('institution-select');
+            const goButton = document.getElementById('go-button');
+            
+            // 当下拉选择变化时
+            select.addEventListener('change', function() {
+                goButton.disabled = !this.value;
+            });
+            
+            // 当点击前往按钮时
+            goButton.addEventListener('click', function() {
+                if (select.value) {
+                    window.open(select.value, '_blank');
+                }
+            });
+            
+            // 支持直接按Enter键跳转
+            select.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && this.value) {
+                    window.open(this.value, '_blank');
+                }
+            });
+        });
     </script>
 </body>
 </html>
