@@ -1,220 +1,84 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-    <meta charset="UTF-8">
+    <title>国债知识</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>国债知识 - PDF查看优化</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
     <style>
-        body {
-            background-color: #f8f9fa;
-            color: #333;
-            font-family: 'Helvetica Neue', Arial, sans-serif;
+        #bond-image { 
+            max-width: 100%; 
+            border: 1px solid #ddd;
+            margin: 20px 0;
         }
-        .header {
-            background: linear-gradient(135deg, #1a6fc4 0%, #2c3e50 100%);
-            color: white;
-            padding: 1.5rem 0;
-            border-bottom: 4px solid #1890ff;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        .header h1 {
-            font-weight: 700;
-            font-size: 2.2rem;
-            margin: 0;
-        }
-        .header p {
-            opacity: 0.9;
-            margin: 0.5rem 0 0;
-        }
-        .card {
-            border-radius: 12px;
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
-            border: none;
-            margin-bottom: 2rem;
-        }
-        .card-header {
+        .announcement {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-left: 4px solid #1890ff;
             background: #f8f9fa;
-            border-bottom: 1px solid #eaecef;
-            padding: 1rem 1.5rem;
-            border-radius: 12px 12px 0 0 !important;
-            font-weight: 600;
         }
-        .pdf-container {
-            padding: 1.5rem;
-            background: #f9f9f9;
-            border-radius: 8px;
+        .last-update { color: #666; margin-top: 30px; }
+        .title-link {
+            text-decoration: none;
+            color: inherit;
         }
-        .btn-primary {
-            background-color: #1890ff;
-            border-color: #1890ff;
-            border-radius: 6px;
-            padding: 0.5rem 1.5rem;
-            font-weight: 500;
+        .title-link:hover {
+            text-decoration: underline;
         }
-        .btn-primary:hover {
-            background-color: #0c7cd5;
-            border-color: #0c7cd5;
-        }
-        .btn-outline-primary {
-            color: #1890ff;
-            border-color: #1890ff;
-            border-radius: 6px;
-        }
-        .btn-outline-primary:hover {
-            background-color: #1890ff;
-            color: white;
-        }
-        .view-options {
-            display: flex;
-            gap: 0.75rem;
-            flex-wrap: wrap;
-            margin-bottom: 1rem;
-        }
-        .mobile-warning {
-            display: none;
-            background: #fff8e6;
-            border-left: 4px solid #ffc53d;
-            padding: 0.75rem 1rem;
-            border-radius: 4px;
-            margin-bottom: 1rem;
-        }
-        .last-update {
-            color: #6c757d;
-            font-size: 0.9rem;
+        .long-image-container {
+            margin: 20px 0;
             text-align: center;
-            margin-top: 2rem;
-            padding-top: 1rem;
-            border-top: 1px solid #eaecef;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            background: #f9f9f9;
         }
-        .help-section {
-            background: #e8f4ff;
-            border-radius: 8px;
-            padding: 1.25rem;
-            margin-top: 1.5rem;
+        .long-image {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
         }
-        .help-title {
-            color: #1890ff;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-        }
-        .feature-icon {
-            color: #1890ff;
-            margin-right: 0.5rem;
-        }
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.8rem;
-            }
-            .view-options {
-                flex-direction: column;
-            }
-            .btn-group {
-                width: 100%;
-            }
-            .btn {
-                width: 100%;
-                margin-bottom: 0.5rem;
-            }
-            .mobile-warning {
-                display: block;
-            }
+        .image-caption {
+            margin-top: 10px;
+            font-style: italic;
+            color: #666;
         }
     </style>
 </head>
 <body>
-    <div class="header text-center">
-        <div class="container">
-            <h1><i class="fas fa-file-pdf"></i> 国债知识普及</h1>
-            <p>2025年国债知识进乡村专题材料</p>
+    <div class="container mt-4">
+        <h1 class="text-center mb-4">国债知识进乡村宣传材料</h1>
+        
+        <!-- 长图显示区 -->
+        <div class="long-image-container">
+            <img src="images/2025国债知识进乡村.png" alt="2025国债知识宣传" class="long-image">
+            <div class="image-caption">2025年国债知识进乡村宣传图</div>
         </div>
-    </div>
-
-    <div class="container my-5">
-        <div class="mobile-warning">
-            <i class="fas fa-info-circle"></i> 手机端查看提示：如果PDF显示不正常，请尝试使用"下载PDF"功能或使用浏览器直接打开。
-        </div>
-
-        <div class="card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <span><i class="fas fa-book-open feature-icon"></i>国债知识PPT（PDF版）</span>
-                <div class="d-none d-md-block">
-                    <span class="badge bg-primary">最新版本</span>
-                    <span class="badge bg-success">适合打印</span>
+        
+        <!-- 辅助信息 -->
+<!--         <div class="row mt-4">
+            <div class="col-md-8 mx-auto">
+                <div class="alert alert-info">
+                    <h5>温馨提示</h5>
+                    <p>如果您需要查看更详细的信息或无法清晰查看图片内容，请联系当地财政部门获取完整宣传材料。</p>
                 </div>
             </div>
-            <div class="card-body">
-                <div class="view-options">
-                    <a href="2025国债知识进乡村.pdf" class="btn btn-primary" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> 浏览器中打开
-                    </a>
-                    <a href="2025国债知识进乡村.pdf" class="btn btn-outline-primary" download>
-                        <i class="fas fa-download"></i> 下载PDF
-                    </a>
-                    <div class="btn-group">
-                        <button class="btn btn-outline-primary" onclick="changeZoom(0.8)">
-                            <i class="fas fa-search-minus"></i> 缩小
-                        </button>
-                        <button class="btn btn-outline-primary" onclick="changeZoom(1.0)">
-                            <i class="fas fa-sync-alt"></i> 重置
-                        </button>
-                        <button class="btn btn-outline-primary" onclick="changeZoom(1.2)">
-                            <i class="fas fa-search-plus"></i> 放大
-                        </button>
-                    </div>
-                </div>
-
-                <div class="pdf-container">
-                    <!-- 使用object标签作为主要PDF查看方式，兼容性更好 -->
-                    <object id="pdf-viewer" data="2025国债知识进乡村.pdf" type="application/pdf" width="100%" height="600px">
-                        <div class="alert alert-warning">
-                            <p>您的浏览器不支持PDF显示，请使用下面的链接下载或查看：</p>
-                            <a href="2025国债知识进乡村.pdf" class="btn btn-primary" download>
-                                <i class="fas fa-download"></i> 下载PDF文档
-                            </a>
-                        </div>
-                    </object>
-                </div>
-            </div>
+        </div> -->
+        
+        <div class="last-update text-center mt-4">
+            <p>页面最后更新于：<span id="update-time"></span></p>
         </div>
-
-        <div class="help-section">
-            <h3 class="help-title"><i class="fas fa-question-circle feature-icon"></i>手机端查看帮助</h3>
-            <p>如果您在手机上无法正常查看PDF，可以尝试以下方法：</p>
-            <ul>
-                <li>点击<strong>"浏览器中打开"</strong>按钮，在新窗口查看PDF</li>
-                <li>点击<strong>"下载PDF"</strong>按钮，将文件保存到手机后用PDF阅读器打开</li>
-                <li>安装专业的PDF阅读器应用（如Adobe Acrobat Reader、WPS Office）</li>
-                <li>确保您的手机操作系统和浏览器都是最新版本</li>
-            </ul>
-        </div>
-
-        <p class="last-update">
-            最后更新: <span id="update-time"></span> | 
-            国债知识普及活动
-        </p>
     </div>
 
     <script>
         // 更新时间显示
         document.getElementById('update-time').textContent = new Date().toLocaleString();
         
-        // PDF缩放功能
-        function changeZoom(factor) {
-            const viewer = document.getElementById('pdf-viewer');
-            const currentHeight = parseInt(viewer.getAttribute('height'));
-            viewer.setAttribute('height', (currentHeight * factor) + 'px');
-        }
-        
-        // 检测移动设备并提供适当提示
-        function isMobileDevice() {
-            return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
-        }
-        
-        if (isMobileDevice()) {
-            document.querySelector('.mobile-warning').style.display = 'block';
-        }
+        // 图片加载错误处理
+        document.querySelector('.long-image').addEventListener('error', function() {
+            this.alt = '图片加载失败，请检查图片路径是否正确';
+            this.parentNode.innerHTML = '<div class="alert alert-warning">图片加载失败，请检查图片路径或文件名是否正确</div>';
+        });
     </script>
 </body>
 </html>
